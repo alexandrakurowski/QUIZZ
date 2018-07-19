@@ -30,20 +30,22 @@ connection.connect(function(err) {
  	connection.query('SELECT * FROM questionnaire', function(err, results) {    // questionnaire  = tableau de la bdd
         if (err) throw err
         for (var i = 0; i < results.length; i++) {
-        	carte.push(results[i]);
-        }
-        console.log(results[0].ID)
-        console.log(results[0].question)
-        console.log(results[0].rep_1)
-        console.log(results[0].rep_2)
-        console.log(results[0].rep_3)
-        console.log(results[0].rep_4)
+        	carte.push({
+            Id : results[i].ID,
+            question : results[i].question,
+            reponse_1 : results[i].rep_1,
+            reponse_2 : results[i].rep_2,
+            reponse_3 : results[i].rep_3,
+            reponse_4 : results[i].rep_4
+          });
+        };
+     
     });
 });
 
 app.get('/question', function(req, res){
 	res.json(carte);
-console.log(carte)
+  console.log(carte);
 });
 
 
